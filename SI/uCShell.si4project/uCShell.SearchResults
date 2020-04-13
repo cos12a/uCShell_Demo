@@ -1,0 +1,11 @@
+---- Term_fc Matches (4 in 1 files) ----
+terminal.c (uCShellDemo\uC-Shell\Terminal\Source) line 55 : #define  TERMINAL_ARG_ERR_FC            (CPU_CHAR *)"Term_fc: usage: Term_fc"
+Terminal_CmdTbl in terminal.c (uCShellDemo\uC-Shell\Terminal\Source) :     {"Term_fc", Terminal_fc},
+terminal.c (uCShellDemo\uC-Shell\Terminal\Source) line 706 : * Note(s)     : (1) (a) Usage(s)    : Term_fc
+---- Term_fc Search Errors Encountered (5) ----
+The following 5 files could not be processed:
+E:\DiskE\ProgramProject\FreeRTOS\uCShell_Demo\uCShellDemo\uCShellDemo\Src\dma.c : File could not be opened.
+E:\DiskE\ProgramProject\FreeRTOS\uCShell_Demo\uCShellDemo\uCShellDemo\Inc\dma.h : File could not be opened.
+E:\DiskE\ProgramProject\FreeRTOS\uCShell_Demo\uCShellDemo\uCShellDemo\Inc\stm32g0xx_hal_conf.h : File could not be opened.
+E:\DiskE\ProgramProject\FreeRTOS\uCShell_Demo\uCShellDemo\uCShellDemo\Src\stm32g0xx_hal_msp.c : File could not be opened.
+E:\DiskE\ProgramProject\FreeRTOS\uCShell_Demo\uCShellDemo\uCShellDemo\Src\stm32g0xx_hal_timebase_tim.c : File could not be opened.
