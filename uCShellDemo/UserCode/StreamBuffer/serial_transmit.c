@@ -48,7 +48,8 @@ static void prvReceivingTask( void *pvParameters );
 
 
 
-static void uart2_rx_strat(void);
+static HAL_StatusTypeDef USER_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
+
 
 static void USER_UART_RxISR_8BIT(UART_HandleTypeDef *huart);
 
@@ -105,7 +106,7 @@ void vStartStreamBufferInit( void )
 										 sbiSTREAM_BUFFER_TRIGGER_LEVEL_1 );
 
 
-    uart2_rx_strat();
+    USER_UART_Receive_IT(&huart2, rxReceiveBuffer, RX_BUFFER_SZIE);
 
 
 
@@ -273,32 +274,69 @@ void RxReceive(void *argument)
 }
 
 
-
-
-static void uart2_rx_strat(void)
+/**
+  * @brief Receive an amount of data in interrupt mode.
+  * @note   When UART parity is not enabled (PCE = 0), and Word Length is configured to 9 bits (M1-M0 = 01),
+  *         the received data is handled as a set of u16. In this case, Size must indicate the number
+  *         of u16 available through pData.
+  * @note   When UART parity is not enabled (PCE = 0), and Word Length is configured to 9 bits (M1-M0 = 01),
+  *         address of user data buffer for storing data to be received, should be aligned on a half word frontier (16 bits)
+  *         (as received data will be handled using u16 pointer cast). Depending on compilation chain,
+  *         use of specific alignment compilation directives or pragmas might be required to ensure proper alignment for pData.
+  * @param huart UART handle.
+  * @param pData Pointer to data buffer (u8 or u16 data elements).
+  * @param Size  Amount of data elements (u8 or u16) to be received.
+  * @retval HAL status
+  */
+static HAL_StatusTypeDef USER_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size)
 {
+  /* Check that a Rx process is not already ongoing */
+  if (huart->RxState == HAL_UART_STATE_READY)
+  {
+    if ((pData == NULL) || (Size == 0U))
+    {
+      return HAL_ERROR;
+    }
 
+    __HAL_LOCK(huart);
 
-    huart2.pRxBuffPtr = rxReceiveBuffer;
-//    huart2.pRxBuffPtr  = pData;
-    huart2.RxXferSize  = sizeof(rxReceiveBuffer);
-    huart2.RxXferCount = sizeof(rxReceiveBuffer);
-    huart2.RxISR = USER_UART_RxISR_8BIT;
+    huart->pRxBuffPtr  = pData;
+    huart->RxXferSize  = Size;
+    huart->RxXferCount = Size;
+//    huart->RxISR       = NULL;
+
     /* Computation of UART mask to apply to RDR register */
-    UART_MASK_COMPUTATION(&huart2);
+    UART_MASK_COMPUTATION(huart);
 
-    huart2.ErrorCode = HAL_UART_ERROR_NONE;
-    huart2.RxState = HAL_UART_STATE_BUSY_RX;
+    huart->ErrorCode = HAL_UART_ERROR_NONE;
+    huart->RxState = HAL_UART_STATE_BUSY_RX;
 
     /* Enable the UART Error Interrupt: (Frame error, noise error, overrun error) */
-    SET_BIT(huart2.Instance->CR3, USART_CR3_EIE);
+    SET_BIT(huart->Instance->CR3, USART_CR3_EIE);
 
-    __HAL_UNLOCK(&huart2);
+    /* Configure Rx interrupt processing*/
+
+    huart->RxISR = USER_UART_RxISR_8BIT;
+    __HAL_UNLOCK(huart);
+
+    /* Enable the UART Parity Error interrupt and RX FIFO Threshold interrupt */
+    SET_BIT(huart->Instance->CR1, USART_CR1_PEIE);
+    SET_BIT(huart->Instance->CR3, USART_CR3_RXFTIE);
+
+    __HAL_UNLOCK(huart);
 
     /* Enable the UART Parity Error interrupt and Data Register Not Empty interrupt */
-    SET_BIT(huart2.Instance->CR1, USART_CR1_PEIE | USART_CR1_RXNEIE_RXFNEIE);
+    SET_BIT(huart->Instance->CR1, USART_CR1_PEIE | USART_CR1_RXNEIE_RXFNEIE);
 
+    return HAL_OK;
+  }
+  else
+  {
+    return HAL_BUSY;
+  }
 }
+
+
 
 
 
@@ -328,9 +366,10 @@ static void USER_UART_RxISR_8BIT(UART_HandleTypeDef *huart)
     {
       uhdata = (uint16_t) READ_REG(huart->Instance->RDR);
       rxData = (uint8_t)(uhdata & (uint8_t)uhMask);
+      
     size_t sendCnt = xStreamBufferSendFromISR( xStreamBuffer,
-                              ( const void * ) rxData ,
-                              sizeof(rxData),
+                              ( const void * ) &rxData ,
+                              sizeof( rxData ),
                                   (BaseType_t *) &pxHigherPriorityTaskWoken );
         if ( sendCnt == 0)
         {
