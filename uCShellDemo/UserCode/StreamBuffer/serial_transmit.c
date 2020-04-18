@@ -34,6 +34,9 @@
 
 #include "includes.h"
 
+#include "user_cmd.h"
+
+
 #define sbiSTREAM_BUFFER_LENGTH_BYTES		 ( ( size_t ) 100 )
 #define sbiSTREAM_BUFFER_TRIGGER_LEVEL_10	( ( BaseType_t ) 10 )
 #define sbiSTREAM_BUFFER_TRIGGER_LEVEL_1 	( ( BaseType_t ) 1 )
@@ -76,10 +79,10 @@ errors have occurred.  Used so the check task can check this task is still
 running as expected. */
 static uint32_t ulCycleCount = 0;
 
-static const char ShShell_Init_err[] = "ShShell_Init is Err.";
-static const char ShShell_Init_done[] =  "ShShell_Init is Done.";
-
-
+static const char ShShell_Init_err[] = "ShShell_Init is Err.\r\n";
+static const char ShShell_Init_done[] =  "ShShell_Init is Done.\r\n";
+static const char userShell_Init_Done[] = "User shell init is done.\r\n";
+static const char userShell_Init_Err[] = "User shell init is error:\r\n";
 
 
 
@@ -94,10 +97,14 @@ void vStartStreamBufferInit( void )
     Shell_Init();
     if ( ShShell_Init() != DEF_OK)
     {
-
         HAL_UART_Transmit(&huart2, (uint8_t *)ShShell_Init_err, sizeof( ShShell_Init_err ), 100u);
     }
     HAL_UART_Transmit(&huart2, (uint8_t *)ShShell_Init_done, sizeof( ShShell_Init_done ), 100u);
+    if ( add_user_cmd() != DEF_OK)
+    {
+           HAL_UART_Transmit(&huart2, (uint8_t *)userShell_Init_Err, sizeof( userShell_Init_Err ), 100u); 
+    }
+     HAL_UART_Transmit(&huart2, (uint8_t *)userShell_Init_Done, sizeof( userShell_Init_Done ), 100u);
 	/* Create the stream buffer that sends data from the interrupt to the
 	task, and create the task. */
 	xStreamBuffer = xStreamBufferCreate( /* The buffer length in bytes. */

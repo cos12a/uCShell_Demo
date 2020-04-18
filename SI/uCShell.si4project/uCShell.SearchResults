@@ -1,11 +1,39 @@
----- Term_fc Matches (4 in 1 files) ----
-terminal.c (uCShellDemo\uC-Shell\Terminal\Source) line 55 : #define  TERMINAL_ARG_ERR_FC            (CPU_CHAR *)"Term_fc: usage: Term_fc"
-Terminal_CmdTbl in terminal.c (uCShellDemo\uC-Shell\Terminal\Source) :     {"Term_fc", Terminal_fc},
-terminal.c (uCShellDemo\uC-Shell\Terminal\Source) line 706 : * Note(s)     : (1) (a) Usage(s)    : Term_fc
----- Term_fc Search Errors Encountered (5) ----
-The following 5 files could not be processed:
+---- shell_exec Matches (28 in 7 files) ----
+app_freertos.c (uCShellDemo\uCShellDemo\Core\Src) line 70 : /* Definitions for uC_Shell_exec */
+app_freertos.c (uCShellDemo\uCShellDemo\Core\Src) line 71 : osThreadId_t uC_Shell_execHandle;
+app_freertos.c (uCShellDemo\uCShellDemo\Core\Src) line 72 : const osThreadAttr_t uC_Shell_exec_attributes = {
+uC_Shell_exec_attributes in app_freertos.c (uCShellDemo\uCShellDemo\Core\Src) :   .name = "uC_Shell_exec",
+MX_FREERTOS_Init in app_freertos.c (uCShellDemo\uCShellDemo\Core\Src) :   /* creation of uC_Shell_exec */
+MX_FREERTOS_Init in app_freertos.c (uCShellDemo\uCShellDemo\Core\Src) :   uC_Shell_execHandle = osThreadNew(Terminal_Task, NULL, &uC_Shell_exec_attributes);
+app_freertos.c (uCShellDemo\uCShellDemo\Core\Src) line 174 : * @brief Function implementing the uC_Shell_exec thread.
+shell.c (uCShellDemo\uC-Shell\Source) line 171 : *                                             Shell_Exec()
+shell.c (uCShellDemo\uC-Shell\Source) line 205 : CPU_INT16S  Shell_Exec (CPU_CHAR         *in,
+Shell_Exec in shell.c (uCShellDemo\uC-Shell\Source) :     if (ret_val == SHELL_EXEC_ERR) {
+shell.c (uCShellDemo\uC-Shell\Source) line 575 : * Caller(s)   : Shell_Exec().
+shell.c (uCShellDemo\uC-Shell\Source) line 673 : * Caller(s)   : Shell_Exec().
+shell.h (uCShellDemo\uC-Shell\Source) line 156 : * Note(s) : (1) Command function MUST return SHELL_EXEC_ERR when an error occurred at execution time.
+shell.h (uCShellDemo\uC-Shell\Source) line 169 : #define  SHELL_EXEC_ERR                                   -1    /* See Note #1.                                         */
+shell.h (uCShellDemo\uC-Shell\Source) line 256 : *               (c) Shell commands MUST return SHELL_EXEC_ERR when an error occured at execution
+shell.h (uCShellDemo\uC-Shell\Source) line 334 : CPU_INT16S   Shell_Exec     (CPU_CHAR         *in,
+shell_cmd.c (uCShellDemo\UserCode\shell_cmd) line 150 : * Return(s)   : SHELL_EXEC_ERR, if an error is encountered.
+LED_Switch in shell_cmd.c (uCShellDemo\UserCode\shell_cmd) :         return (SHELL_EXEC_ERR);
+sh_shell.c (uCShellDemo\uC-Shell\Cmd\General) line 164 : * Return(s)   : SHELL_EXEC_ERR, if an error is encountered.
+ShShell_help in sh_shell.c (uCShellDemo\uC-Shell\Cmd\General) :         return (SHELL_EXEC_ERR);
+ShShell_help in sh_shell.c (uCShellDemo\uC-Shell\Cmd\General) :              Shell_Exec(cmd_str, out_fnct, pcmd_param, &err);
+Terminal_Task in terminal.c (uCShellDemo\uC-Shell\Terminal\Source) :                         (void)Shell_Exec( cmd,                  /* ... OR exec cmd.                                     */
+terminal.c (uCShellDemo\uC-Shell\Terminal\Source) line 440 : * Return(s)   : SHELL_EXEC_ERR, if an error is encountered.
+terminal.c (uCShellDemo\uC-Shell\Terminal\Source) line 701 : * Return(s)   : SHELL_EXEC_ERR, if an error is encountered.
+Terminal_fc in terminal.c (uCShellDemo\uC-Shell\Terminal\Source) :         return (SHELL_EXEC_ERR);
+user_cmd.c (uCShellDemo\UserCode\shell_cmd) line 150 : * Return(s)   : SHELL_EXEC_ERR, if an error is encountered.
+LED_Switch in user_cmd.c (uCShellDemo\UserCode\shell_cmd) :         return (SHELL_EXEC_ERR);
+---- shell_exec Search Errors Encountered (9) ----
+The following 9 files could not be processed:
+E:\DiskE\ProgramProject\FreeRTOS\uCShell_Demo\uCShellDemo\uC-CPU\cpu_cache.h : File could not be opened.
+E:\DiskE\ProgramProject\FreeRTOS\uCShell_Demo\uCShellDemo\uC-CPU\cpu_core.c : File could not be opened.
+E:\DiskE\ProgramProject\FreeRTOS\uCShell_Demo\uCShellDemo\uC-CPU\cpu_core.h : File could not be opened.
 E:\DiskE\ProgramProject\FreeRTOS\uCShell_Demo\uCShellDemo\uCShellDemo\Src\dma.c : File could not be opened.
 E:\DiskE\ProgramProject\FreeRTOS\uCShell_Demo\uCShellDemo\uCShellDemo\Inc\dma.h : File could not be opened.
 E:\DiskE\ProgramProject\FreeRTOS\uCShell_Demo\uCShellDemo\uCShellDemo\Inc\stm32g0xx_hal_conf.h : File could not be opened.
 E:\DiskE\ProgramProject\FreeRTOS\uCShell_Demo\uCShellDemo\uCShellDemo\Src\stm32g0xx_hal_msp.c : File could not be opened.
 E:\DiskE\ProgramProject\FreeRTOS\uCShell_Demo\uCShellDemo\uCShellDemo\Src\stm32g0xx_hal_timebase_tim.c : File could not be opened.
+E:\DiskE\ProgramProject\FreeRTOS\uCShell_Demo\uCShellDemo\UserCode\StreamBuffer\StreamBufferInterrupt.c : File could not be opened.

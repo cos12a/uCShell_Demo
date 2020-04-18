@@ -81,9 +81,9 @@ static  CPU_INT16S  ShShell_Test(CPU_INT16U        argc,
                                  SHELL_OUT_FNCT    out_fnct,
                                  SHELL_CMD_PARAM  *pcmd_param);
 
-static  SHELL_CMD  ShShell_CmdTbl [] =
+static  SHELL_CMD  User_CmdTbl [] =
 {
-    {"Sh_help", ShShell_help},
+    {"LED_SW", LED_Switch},
     {0,         0           }
 };
 
@@ -112,13 +112,13 @@ static  SHELL_CMD  ShShell_CmdTbl [] =
 *********************************************************************************************************
 */
 
-CPU_BOOLEAN  ShShell_Init (void)
+CPU_BOOLEAN  add_user_cmd (void)
 {
     SHELL_ERR    err;
     CPU_BOOLEAN  ok;
 
 
-    Shell_CmdTblAdd((CPU_CHAR *)"Sh", ShShell_CmdTbl, &err);
+    Shell_CmdTblAdd((CPU_CHAR *)"Sh", User_CmdTbl, &err);
 
     ok = (err == SHELL_ERR_NONE) ? DEF_OK : DEF_FAIL;
     return (ok);
@@ -159,7 +159,7 @@ CPU_BOOLEAN  ShShell_Init (void)
 
 
 
-static  CPU_INT16S  ShShell_help (CPU_INT16U        argc,
+static  CPU_INT16S  LED_Switch (CPU_INT16U        argc,
                                   CPU_CHAR         *argv[],
                                   SHELL_OUT_FNCT    out_fnct,
                                   SHELL_CMD_PARAM  *pcmd_param)
@@ -168,6 +168,22 @@ static  CPU_INT16S  ShShell_help (CPU_INT16U        argc,
     SHELL_ERR          err;
     SHELL_CMD         *pcmd;
     SHELL_MODULE_CMD  *pmodule_cmd;
+    
+    if (argc == 2) {
+        if (Str_Cmp(argv[1], SH_SHELL_STR_HELP) == 0) {
+            (void)out_fnct(SH_SHELL_ARG_ERR_HELP, (CPU_INT16U)Str_Len(SH_SHELL_ARG_ERR_HELP), pcmd_param->pout_opt);
+            (void)out_fnct(SH_SHELL_NEW_LINE,     2,                                          pcmd_param->pout_opt);
+            (void)out_fnct(SH_SHELL_CMD_EXP_HELP, (CPU_INT16U)Str_Len(SH_SHELL_CMD_EXP_HELP), pcmd_param->pout_opt);
+            (void)out_fnct(SH_SHELL_NEW_LINE,     2,                                          pcmd_param->pout_opt);
+            return (SHELL_ERR_NONE);
+        }
+    }
+
+    if ((argc != 1) && (argc != 2)) {
+        (void)out_fnct(SH_SHELL_ARG_ERR_HELP, (CPU_INT16U)Str_Len(SH_SHELL_ARG_ERR_HELP), pcmd_param->pout_opt);
+        (void)out_fnct(SH_SHELL_NEW_LINE,     2,                                          pcmd_param->pout_opt);
+        return (SHELL_EXEC_ERR);
+    }
 
 
 

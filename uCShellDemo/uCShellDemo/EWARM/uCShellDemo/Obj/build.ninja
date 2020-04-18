@@ -65,13 +65,14 @@ build shell.pbi : index shell.xcl
 build terminal_mode.pbi : index terminal_mode.xcl
 build terminal_serial.pbi : index terminal_serial.xcl
 build terminal.pbi : index terminal.xcl
+build user_cmd.pbi : index user_cmd.xcl
 build uCShellDemo_part0.pbi : link app_freertos.pbi gpio.pbi main.pbi stm32g0xx_hal_msp.pbi stm32g0xx_hal_timebase_tim.pbi stm32g0xx_it.pbi usart.pbi
 build uCShellDemo_part1.pbi : link system_stm32g0xx.pbi stm32g0xx_hal.pbi stm32g0xx_hal_cortex.pbi stm32g0xx_hal_dma.pbi stm32g0xx_hal_dma_ex.pbi stm32g0xx_hal_exti.pbi stm32g0xx_hal_flash.pbi
 build uCShellDemo_part2.pbi : link stm32g0xx_hal_flash_ex.pbi stm32g0xx_hal_gpio.pbi stm32g0xx_hal_pwr.pbi stm32g0xx_hal_pwr_ex.pbi stm32g0xx_hal_rcc.pbi stm32g0xx_hal_rcc_ex.pbi stm32g0xx_hal_tim.pbi
 build uCShellDemo_part3.pbi : link stm32g0xx_hal_tim_ex.pbi stm32g0xx_hal_uart.pbi stm32g0xx_hal_uart_ex.pbi stm32g0xx_ll_rcc.pbi cmsis_os2.pbi croutine.pbi event_groups.pbi
 build uCShellDemo_part4.pbi : link heap_4.pbi list.pbi port.pbi queue.pbi stream_buffer.pbi tasks.pbi timers.pbi
 build uCShellDemo_part5.pbi : link serial_transmit.pbi lib_ascii.pbi lib_math.pbi lib_mem.pbi lib_str.pbi sh_shell.pbi shell.pbi
-build uCShellDemo_part6.pbi : link terminal_mode.pbi terminal_serial.pbi terminal.pbi
+build uCShellDemo_part6.pbi : link terminal_mode.pbi terminal_serial.pbi terminal.pbi user_cmd.pbi
 build uCShellDemo.pbd : link uCShellDemo_part0.pbi uCShellDemo_part1.pbi uCShellDemo_part2.pbi uCShellDemo_part3.pbi uCShellDemo_part4.pbi uCShellDemo_part5.pbi uCShellDemo_part6.pbi
 build uCShellDemo.pbw : browsedata uCShellDemo.pbd
 

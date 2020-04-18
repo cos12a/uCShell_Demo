@@ -1417,4 +1417,10 @@
             </file>
         </group>
     </group>
+    <group>
+        <name>User_Code</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\UserCode\shell_cmd\user_cmd.c</name>
+        </file>
+    </group>
 </project>
