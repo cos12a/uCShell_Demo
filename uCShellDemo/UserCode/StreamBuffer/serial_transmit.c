@@ -355,7 +355,7 @@ static HAL_StatusTypeDef USER_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t
   * @retval None
   */
 
-
+static uint8_t rxData;
 static void USER_UART_RxISR_8BIT(UART_HandleTypeDef *huart)
 {
   uint16_t  uhMask = huart->Mask;
@@ -363,7 +363,7 @@ static void USER_UART_RxISR_8BIT(UART_HandleTypeDef *huart)
   uint16_t   nb_rx_data;
   uint16_t  rxdatacount;
   
-  uint8_t rxData;
+//  uint8_t rxData;
   const BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
 
   /* Check that a Rx process is ongoing */

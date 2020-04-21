@@ -803,7 +803,7 @@
                     <item>pmodule_cmd_list</item>
                     <item>p1_str</item>
                     <item>p2_str</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

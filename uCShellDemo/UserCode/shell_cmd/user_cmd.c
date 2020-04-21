@@ -83,7 +83,7 @@ static  CPU_INT16S  LED_Switch(CPU_INT16U        argc,
 
 static  SHELL_CMD  User_CmdTbl [] =
 {
-    {"Led", LED_Switch},
+    {"User_led", LED_Switch},
     {0,         0           }
 };
 
@@ -118,7 +118,7 @@ CPU_BOOLEAN  add_user_cmd (void)
     CPU_BOOLEAN  ok;
 
 
-    Shell_CmdTblAdd((CPU_CHAR *)"Le", User_CmdTbl, &err);
+    Shell_CmdTblAdd((CPU_CHAR *)"User", User_CmdTbl, &err);
 
     ok = (err == SHELL_ERR_NONE) ? DEF_OK : DEF_FAIL;
     return (ok);
@@ -188,12 +188,12 @@ static  CPU_INT16S  LED_Switch (CPU_INT16U        argc,
         return (SHELL_EXEC_ERR);
     }
 
-    if (Str_Cmp(argv[1], LED_ON))
+    if (Str_Cmp(argv[1], LED_ON) == 0u)
     {
         (void)out_fnct(LED_OUT_ON, (CPU_INT16U)Str_Len(LED_OUT_ON), pcmd_param->pout_opt);
 
     }
-    if (Str_Cmp(argv[1], LED_OFF))
+    if (Str_Cmp(argv[1], LED_OFF) == 0u)
     {
         (void)out_fnct(LED_OUT_OFF, (CPU_INT16U)Str_Len(LED_OUT_OFF), pcmd_param->pout_opt);
 
