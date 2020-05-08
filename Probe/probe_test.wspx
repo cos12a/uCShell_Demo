@@ -67,6 +67,84 @@
       </innercontent>
       <symbols />
     </node>
+    <node ScreenId="DataScreen3" NodeId="CustomDiagramNode8" OffsetX="740.99065173333429" OffsetY="2867.52" AllowMove="true" AllowResize="false" AllowRotate="false" AllowSelect="true" Width="145" Height="160" ZIndex="6" IsLocked="false" RotateAngle="0" Pivot="0.5,0.5" UpdateWhenVisible="false" IsWritableControl="false" WritableValue="0" IsDrawingShape="false" ShapeTypeStr="" RibbonTool="None">
+      <innercontent>
+        <content ControlType="Spreadsheet" Type="Spreadsheet">
+          <definitions>
+            <spreadsheet>
+              <excel path="..\probe_test_DataScreen3_Spreadsheet.xlsx">
+                <properties>
+                  <WINDOWPLACEMENT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                    <length>44</length>
+                    <flags>0</flags>
+                    <showCmd>2</showCmd>
+                    <minPosition>
+                      <X>-32000</X>
+                      <Y>-32000</Y>
+                    </minPosition>
+                    <maxPosition>
+                      <X>-1</X>
+                      <Y>-1</Y>
+                    </maxPosition>
+                    <normalPosition>
+                      <Left>472</Left>
+                      <Top>321</Top>
+                      <Right>1579</Right>
+                      <Bottom>1214</Bottom>
+                    </normalPosition>
+                  </WINDOWPLACEMENT>
+                </properties>
+              </excel>
+              <symbols>
+                <symbol path="rxData" IsAnArrayElement="false" ElementIndex="0" IsCustomSymbol="true" Mask_Enabled="false" Mask_Start_Bit="0" Mask_End_Bit="0" />
+              </symbols>
+            </spreadsheet>
+          </definitions>
+        </content>
+      </innercontent>
+      <symbols>
+        <symbol path="rxData" IsAnArrayElement="false" ElementIndex="0" IsCustomSymbol="true" Mask_Enabled="false" Mask_Start_Bit="0" Mask_End_Bit="0" />
+      </symbols>
+    </node>
+    <node ScreenId="DataScreen3" NodeId="CustomDiagramNode9" OffsetX="1110" OffsetY="2900" AllowMove="true" AllowResize="false" AllowRotate="false" AllowSelect="true" Width="350" Height="200" ZIndex="7" IsLocked="false" RotateAngle="0" Pivot="0.5,0.5" UpdateWhenVisible="true" IsWritableControl="false" WritableValue="0" IsDrawingShape="false" ShapeTypeStr="" RibbonTool="None">
+      <innercontent>
+        <content ControlType="DataLogger" Type="DataLogger">
+          <datalogging>
+            <configuration>
+              <settings CurrentCfgFile="" StopLoggingBasedOnMaximunFileSize="false" MaximumFileSize="0" Units="MB">
+                <output Outputfile="" ShowTime="true" ShowDate="true" AutoIncrementFileName="true" ReuseSameFile="false" />
+                <repeat IsUntilDateEnabled="false" IsNumberOfTimesEnabled="true" NumberOfTimes="0" Until="4/21/2020" UseSameLogFile="false" IsEnabled="false">
+                  <time>
+                    <milliseconds>100</milliseconds>
+                    <seconds>0</seconds>
+                    <minutes>0</minutes>
+                    <hour>0</hour>
+                  </time>
+                </repeat>
+                <dataLogger>
+                  <trigger IsEnabled="true" UseCustomConditions="false">
+                    <time>
+                      <milliseconds>100</milliseconds>
+                      <seconds>0</seconds>
+                      <minutes>0</minutes>
+                      <hour>0</hour>
+                    </time>
+                    <Symbols />
+                    <StartConditions>
+                      <configuration />
+                    </StartConditions>
+                    <StopConditions>
+                      <configuration />
+                    </StopConditions>
+                  </trigger>
+                </dataLogger>
+              </settings>
+            </configuration>
+          </datalogging>
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
   </nodes>
   <screens_objects />
   <explorer>
@@ -91,7 +169,7 @@
             <Height>0</Height>
           </PreviousContainerDesiredSize>
           <PreviousDesiredWidthInDockedMode>1170.4</PreviousDesiredWidthInDockedMode>
-          <PreviousDesiredHeightInDockedMode>129.59999999999997</PreviousDesiredHeightInDockedMode>
+          <PreviousDesiredHeightInDockedMode>395.19999999999993</PreviousDesiredHeightInDockedMode>
           <Name>usrSymbolBrowser</Name>
           <ShowTopmostMenuItem>false</ShowTopmostMenuItem>
           <TopMost>false</TopMost>
@@ -102,7 +180,7 @@
           <TargetDocked />
           <TargetFloating />
           <DesiredWidthInDockedMode>1170.4</DesiredWidthInDockedMode>
-          <DesiredHeightInDockedMode>129.6</DesiredHeightInDockedMode>
+          <DesiredHeightInDockedMode>395.2</DesiredHeightInDockedMode>
           <DesiredWidthInFloatingMode>90</DesiredWidthInFloatingMode>
           <DesiredHeightInFloatingMode>360</DesiredHeightInFloatingMode>
           <NoDock>false</NoDock>
